@@ -2,12 +2,44 @@ import { sql } from '@vercel/postgres';
 import {
   CustomerField,
   CustomersTableType,
+  Employees,
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
   Revenue,
+  Team,
 } from './definitions';
 import { formatCurrency } from './utils';
+
+export async function fetchTeams(id) {
+  try {
+    // Artificially delay a response for demo purposes.
+    // Don't do this in production :)
+
+    // console.log('Fetching revenue data...');
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    id = 1;
+    const dataTeam = await sql<Team>`SELECT * FROM team`;
+    const dataEmployees = await sql<Employees>`SELECT * FROM employees`;
+
+    console.log('data recup');
+
+    // console.log('Data fetch completed after 3 seconds.');
+
+    const data = {
+      title : dataTeam.rows[0].name,
+      headin : dataTeam.rows[0].heading,
+      description : dataTeam.rows[0].description,
+      employees : dataEmployees,
+    };
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch revenue data.');
+  }
+}
 
 export async function fetchRevenue() {
   try {
