@@ -11,7 +11,7 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
-export async function fetchTeams(id) {
+export async function fetchTeams() {
   try {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
@@ -19,7 +19,6 @@ export async function fetchTeams(id) {
     // console.log('Fetching revenue data...');
     // await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    id = 1;
     const dataTeam = await sql<Team>`SELECT * FROM team`;
     const dataEmployees = await sql<Employees>`SELECT * FROM employees`;
 
