@@ -20,9 +20,7 @@ export async function fetchTeams() {
     // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const dataTeam = await sql<Team>`SELECT * FROM team`;
-    const dataEmployees = await sql<Employees>`SELECT * FROM employees`;
-
-    console.log('data recup');
+    const dataEmployees = (await sql<Employees>`SELECT * FROM employees`).rows;
 
     // console.log('Data fetch completed after 3 seconds.');
 
